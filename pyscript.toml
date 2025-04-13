@@ -1,0 +1,6 @@
+packages = ['pillow', 'numpy', 'pyodide-py', 'qrcode', 'cryptography']
+
+[[fetch]]
+files = ["main.py", "event_handlers.py", "crypto.py", "qr_generator.py", "stego.py", "ui_handlers.py"]
+from = 'scripts'
+to_folder = '.'

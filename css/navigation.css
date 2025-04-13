@@ -1,0 +1,65 @@
+/* Navigation styles */
+.nav-pills .nav-link {
+    color: #495057;
+    background-color: #f1f1f1;
+    margin: 0 2px;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #4CAF50;
+}
+
+.nav-pills .nav-link:hover:not(.active) {
+    background-color: #e9ecef;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.input-section {
+    display: none;
+}
+
+.input-section.active {
+    display: block;
+}
+
+/* Language selector */
+.language-selector {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.language-selector .dropdown-toggle {
+    padding: 0.375rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.language-selector .flag {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+#current-language-flag {
+    margin-right: 5px;
+    font-size: 1.2em;
+}
+
+#current-language-code {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+}

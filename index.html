@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- TITLE -->
+    <title data-i18n="app.title">QRGuardian</title>
+    <link rel="icon" href="img/QRGuardian-logo.png" type="image/png">
+    <link rel="shortcut icon" href="img/QRGuardian-logo.png" type="image/png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://pyscript.net/releases/2023.05.1/pyscript.css" />
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/fileUpload.css" />
+    <link rel="stylesheet" href="css/navigation.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+
+    <!-- JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="https://pyscript.net/releases/2023.05.1/pyscript.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+    <script defer src="js/downloadLinks.js"></script>
+    <script defer src="js/fileUpload.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/navigation.js"></script>
+    <script defer src="js/ui.js"></script>
+    <script defer src="js/translations.js"></script>
+</head>
+
+<body>
+    <py-config src="pyscript.toml"></py-config>
+    <py-script src="scripts/main.py"></py-script>
+
+    <div class="container py-4">
+        <header class="mb-4 position-relative">
+            <div class="language-selector">
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="current-language-flag">🇬🇧</span>
+                        <span id="current-language-code">EN</span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item" href="#" data-lang="en"><span class="flag">🇬🇧</span> English</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#" data-lang="cs"><span class="flag">🇨🇿</span> Čeština</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#" data-lang="sk"><span class="flag">🇸🇰</span>Slovenčina</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h1 class="text-center mb-3">
+                <img src="img/QRGuardian-logo.png" alt="QRGuardian Logo" class="title-icon">
+                <span data-i18n="app.title">QRGuardian</span>
+            </h1>
+            <h2 class="text-center fs-5 mb-4 text-muted" data-i18n="app.subtitle">with Watermark, Hidden Message and Digital Signature</h2>
+            
+            <nav>
+                <ul class="nav nav-pills nav-fill mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#create" data-i18n="nav.create">Create QR Code</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#decode" data-i18n="nav.decode">Decode QR Code</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#verify" data-i18n="nav.verify">Verify Signature</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#detect" data-i18n="nav.detect">Detect QR Code</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Create QR Code Section -->
+        <div id="create" class="page active">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="mb-0 fs-4" data-i18n="create.title">Create QR Code</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="qr_mode" class="form-label" data-i18n="create.qrType">QR Code Type:</label>
+                        <select id="qr_mode" class="form-select py-input col-sm-8">
+                            <option value="website" data-i18n="create.types.website">Website URL</option>
+                            <option value="text" data-i18n="create.types.text">Plain Text</option>
+                            <option value="vcard" data-i18n="create.types.vcard">Contact Information</option>
+                            <option value="email" data-i18n="create.types.email">Email</option>
+                            <option value="wifi" data-i18n="create.types.wifi">WiFi Network</option>
+                            <option value="location" data-i18n="create.types.location">Geographic Location</option>
+                            <option value="bitcoin" data-i18n="create.types.bitcoin">Bitcoin Payment</option>
+                            <option value="sms" data-i18n="create.types.sms">SMS Message</option>
+                            <option value="phone" data-i18n="create.types.phone">Phone Number</option>
+                            <option value="json" data-i18n="create.types.json">JSON Data</option>
+                        </select>
+                    </div>
+
+                    <!-- Website URL Section -->
+                    <div id="website-section" class="input-section active">
+                        <div class="mb-3">
+                            <label for="website_url" class="form-label" data-i18n="create.website.url">Website URL:</label>
+                            <input id="website_url" class="form-control py-input" type="text" value="https://pyscript.com" placeholder="https://example.com" />
+                        </div>
+                    </div>
+
+                    <!-- Plain Text Section -->
+                    <div id="text-section" class="input-section">
+                        <div class="mb-3">
+                            <label for="text_content" class="form-label" data-i18n="create.text.content">Text Content:</label>
+                            <textarea id="text_content" class="form-control py-input" rows="3" placeholder="Enter your text message"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Email Section -->
+                    <div id="email-section" class="input-section">
+                        <div class="mb-3">
+                            <label for="email_address" class="form-label" data-i18n="create.email.address">Email Address:</label>
+                            <input id="email_address" class="form-control py-input" type="text" placeholder="someone@example.com" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email_subject" class="form-label" data-i18n="create.email.subject">Subject:</label>
+                            <input id="email_subject" class="form-control py-input" type="text" placeholder="Email Subject" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email_body" class="form-label" data-i18n="create.email.body">Body:</label>
+                            <textarea id="email_body" class="form-control py-input" rows="3" placeholder="Email body text"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- WiFi Section -->
+                    <div id="wifi-section" class="input-section">
+                        <div class="mb-3">
+                            <label for="wifi_ssid" class="form-label" data-i18n="create.wifi.ssid">Network Name (SSID):</label>
+                            <input id="wifi_ssid" class="form-control py-input" type="text" placeholder="WiFi Network Name" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="wifi_password" class="form-label" data-i18n="create.wifi.password">Password:</label>
+                            <input id="wifi_password" class="form-control py-input" type="text" placeholder="WiFi Password" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="wifi_encryption" class="form-label" data-i18n="create.wifi.encryption">Encryption Type:</label>
+                            <select id="wifi_encryption" class="form-select py-input">
+                                <option value="WPA" data-i18n="create.wifi.encryptionTypes.wpa">WPA/WPA2</option>
+                                <option value="WEP" data-i18n="create.wifi.encryptionTypes.wep">WEP</option>
+                                <option value="nopass" data-i18n="create.wifi.encryptionTypes.nopass">None</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="wifi_hidden" class="form-label" data-i18n="create.wifi.hidden">Hidden Network:</label>
+                            <select id="wifi_hidden" class="form-select py-input">
+                                <option value="false" data-i18n="create.wifi.hiddenOptions.false">No</option>
+                                <option value="true" data-i18n="create.wifi.hiddenOptions.true">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Location Section -->
+                    <div id="location-section" class="input-section">
+                        <div class="mb-3">
+                            <label for="location_latitude" class="form-label" data-i18n="create.location.latitude">Latitude:</label>
+                            <input id="location_latitude" class="form-control py-input" type="text" placeholder="e.g., 37.7749" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="location_longitude" class="form-label" data-i18n="create.location.longitude">Longitude:</label>
+                            <input id="location_longitude" class="form-control py-input" type="text" placeholder="e.g., -122.4194" />
+                        </div>
+                    </div>
+
+                    <!-- Bitcoin Payment Section -->
+                    <div id="bitcoin-section" class="input-section">
+                        <div class="mb-3">
+                            <label for="bitcoin_address" class="form-label" data-i18n="create.bitcoin.address">Bitcoin Address:</label>
+                            <input id="bitcoin_address" class="form-control py-input" type="text" placeholder="e.g., 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="bitcoin_amount" class="form-label" data-i18n="create.bitcoin.amount">Amount (optional):</label>
+                            <input id="bitcoin_amount" class="form-control py-input" type="text" placeholder="e.g., 0.01" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="bitcoin_label" class="form-label" data-i18n="create.bitcoin.label">Label (optional):</label>
+                            <input id="bitcoin_label" class="form-control py-input" type="text" placeholder="Payment for services" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="bitcoin_message" class="form-label" data-i18n="create.bitcoin.message">Message (optional):</label>
+                            <input id="bitcoin_message" class="form-control py-input" type="text" placeholder="Thank you!" />
+                        </div>
+                    </div>
+
+                    <!-- SMS Section -->
+                    <div id="sms-section" class="input-section">
+                        <div class="mb-3">
+                            <label for="sms_number" class="form-label" data-i18n="create.sms.number">Phone Number:</label>
+                            <input id="sms_number" class="form-control py-input" type="text" placeholder="e.g., +1234567890" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="sms_message" class="form-label" data-i18n="create.sms.message">Message:</label>
+                            <textarea id="sms_message" class="form-control py-input" rows="3" placeholder="Your message here"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Phone Section -->
+                    <div id="phone-section" class="input-section">
+                        <div class="mb-3">
+                            <label for="phone_number" class="form-label" data-i18n="create.phone.number">Phone Number:</label>
+                            <input id="phone_number" class="form-control py-input" type="text" placeholder="e.g., +1234567890" />
+                        </div>
+                    </div>
+
+                    <!-- Updated vCard Section with separate phone fields -->
+                    <div id="vcard-section" class="input-section">
+                        <div class="mb-3">
+                            <label for="vcard_name" class="form-label" data-i18n="create.vcard.name">Full Name:</label>
+                            <input id="vcard_name" class="form-control py-input" type="text" placeholder="John Doe" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="vcard_work_phone" class="form-label" data-i18n="create.vcard.work_phone">Work Phone:</label>
+                            <input id="vcard_work_phone" class="form-control py-input" type="text" placeholder="+1234567890" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="vcard_cell_phone" class="form-label" data-i18n="create.vcard.cell_phone">Cell Phone:</label>
+                            <input id="vcard_cell_phone" class="form-control py-input" type="text" placeholder="+1234567890" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="vcard_fax" class="form-label" data-i18n="create.vcard.fax">Fax:</label>
+                            <input id="vcard_fax" class="form-control py-input" type="text" placeholder="+1234567890" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="vcard_email" class="form-label" data-i18n="create.vcard.email">Email:</label>
+                            <input id="vcard_email" class="form-control py-input" type="text" placeholder="john@example.com" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="vcard_org" class="form-label" data-i18n="create.vcard.org">Organization:</label>
+                            <input id="vcard_org" class="form-control py-input" type="text" placeholder="ACME Inc." />
+                        </div>
+                        <div class="mb-3">
+                            <label for="vcard_title" class="form-label" data-i18n="create.vcard.title">Title:</label>
+                            <input id="vcard_title" class="form-control py-input" type="text" placeholder="Software Developer" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="vcard_url" class="form-label" data-i18n="create.vcard.url">Website:</label>
+                            <input id="vcard_url" class="form-control py-input" type="text" placeholder="https://example.com" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="vcard_address" class="form-label" data-i18n="create.vcard.address">Address:</label>
+                            <textarea id="vcard_address" class="form-control py-input" rows="2" placeholder="123 Main St, City, Country"></textarea>
+                            <small class="form-text text-muted">Format: Street, City, State, ZIP, Country</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="vcard_note" class="form-label" data-i18n="create.vcard.note">Note:</label>
+                            <textarea id="vcard_note" class="form-control py-input" rows="2" placeholder="Additional information"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- JSON Section -->
+                    <div id="json-section" class="input-section">
+                        <div class="mb-3">
+                            <label for="json_content" class="form-label" data-i18n="create.json.content">JSON Content:</label>
+                            <textarea id="json_content" class="form-control py-input" rows="6" placeholder='{"key": "value"}'></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Ed25519 Digital Signature Section -->
+                    <div class="mb-4 card">
+                        <div class="card-header">
+                            <h3 class="mb-0 fs-5" data-i18n="create.signature.title">Digital Signature</h3>
+                        </div>
+                        <div class="file-drop-area mb-3">
+                            <label for="private-key-input" class="form-label" data-i18n="create.signature.uploadPrivateKey">Upload Private Key (ED25519 or RSA):</label>
+                            <div class="file-drop-container">
+                                <i class="fas fa-cloud-upload-alt file-drop-icon"></i>
+                                <span class="file-drop-message" data-i18n="create.signature.dropPrivateKey">Drag & drop your private key file here or click to browse</span>
+                                <input type="file" id="private-key-input" class="file-drop-input" />
+                            </div>
+                            <div id="key-status" class="form-text text-muted" data-i18n="create.signature.noKeyLoaded">No key loaded (supports ED25519 and RSA)</div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="use-steganography" checked>
+                            <label class="form-check-label" for="use-steganography" data-i18n="create.useSteganography">Use steganography (hide signature in QR code)</label>
+                        </div>
+                    </div>
+
+                    <div class="file-drop-area mb-3">
+                        <label for="watermark-input" class="form-label" data-i18n="create.watermark.title">Watermark Image (optional):</label>
+                        <div class="file-drop-container">
+                            <i class="fas fa-cloud-upload-alt file-drop-icon"></i>
+                            <span class="file-drop-message" data-i18n="create.watermark.dropWatermark">Drag & drop your watermark image here or click to browse</span>
+                            <input type="file" id="watermark-input" class="file-drop-input" accept="image/*" />
+                        </div>
+                        <div id="watermark-controls" style="display: none;">
+                            <div class="row align-items-center mt-2">
+                                <div class="col-4 mb-2 mb-sm-0">
+                                    <img id="watermark-preview" class="img-thumbnail" alt="Watermark Preview" />
+                                </div>
+                                <div class="col-8">
+                                    <label for="watermark-opacity" class="form-label" data-i18n="create.watermark.opacity">Watermark Opacity:</label>
+                                    <input type="range" id="watermark-opacity" class="form-range" min="0.1" max="0.9" step="0.1" value="0.3" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="generate-btn" class="btn btn-primary py-button w-100" type="submit" data-i18n="create.buttons.create">Create QR Code</button>
+                <div id="status-message" class="mt-2 text-center"></div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="mb-0 fs-4" data-i18n="create.generated.title">Generated QR Code:</h2>
+                </div>
+                <div class="card-body text-center">
+                    <img id="qr_image" class="img-fluid mx-auto d-block border" />
+
+                    <div class="mt-3" id="signature-download-container" style="display: none;">
+                        <a id="signature-download-link" class="btn btn-secondary py-button" download="signature.bin">
+                            <i class="fas fa-download"></i> <span data-i18n="create.buttons.downloadSignature">Download Signature File</span>
+                        </a>
+                    </div>
+
+                    <div class="mt-3">
+                        <button id="decode-btn" class="btn btn-secondary py-button" type="submit" data-i18n="create.buttons.decode">Decode Hidden Message</button>
+                        <p id="decoded-message" class="mt-2" data-i18n="create.generated.hiddenMessage">Hidden message will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decode QR Code Section -->
+        <div id="decode" class="page">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="mb-0 fs-4" data-i18n="decode.title">Decode External QR Code</h2>
+                </div>
+                <div class="card-body">
+                    <div class="file-drop-area mb-3">
+                        <label for="decode-file-input" class="form-label" data-i18n="decode.uploadQR">Upload a QR Code Image with Hidden Message:</label>
+                        <div class="file-drop-container">
+                            <i class="fas fa-cloud-upload-alt file-drop-icon"></i>
+                            <span class="file-drop-message" data-i18n="decode.dropQR">Drag & drop your QR code image here or click to browse</span>
+                            <input type="file" id="decode-file-input" class="file-drop-input" accept="image/jpeg, image/png" />
+                        </div>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <h3 class="fs-5 mb-2" data-i18n="decode.uploadedQR">Uploaded QR Code:</h3>
+                        <img id="decode-qr_image" class="img-fluid mx-auto d-block border" alt="Uploaded QR Code" />
+                    </div>
+
+                    <button id="decode-external-btn" class="btn btn-primary py-button w-100" type="submit" data-i18n="decode.button">Decode Hidden Message</button>
+                    <p id="decode-decoded-message" class="mt-2 text-center" data-i18n="decode.message">Hidden message will appear here.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verify Signature Section -->
+        <div id="verify" class="page">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="mb-0 fs-4" data-i18n="verify.title">Verify QR Code Signature</h2>
+                </div>
+                <div class="card-body">
+                    <div class="file-drop-area mb-3">
+                        <label for="verify-file-input" class="form-label" data-i18n="verify.uploadQR">Upload QR Code Image:</label>
+                        <div class="file-drop-container">
+                            <i class="fas fa-cloud-upload-alt file-drop-icon"></i>
+                            <span class="file-drop-message" data-i18n="verify.dropQR">Drag & drop QR code image here</span>
+                            <input type="file" id="verify-file-input" class="file-drop-input" accept="image/jpeg, image/png" />
+                        </div>
+                    </div>
+
+                    <div class="file-drop-area mb-3">
+                        <label for="verify-sig-input" class="form-label">Upload Signature File (.txt):</label>
+                        <div class="file-drop-container">
+                            <i class="fas fa-cloud-upload-alt file-drop-icon"></i>
+                            <span class="file-drop-message">Drag & drop signature text file here</span>
+                            <input type="file" id="verify-sig-input" class="file-drop-input" accept=".txt,.text" />
+                        </div>
+                    </div>
+
+                    <div class="file-drop-area mb-3">
+                        <label for="public-key-input" class="form-label" data-i18n="verify.uploadPublicKey">Upload Public Key (ED25519 or RSA):</label>
+                        <div class="file-drop-container">
+                            <i class="fas fa-cloud-upload-alt file-drop-icon"></i>
+                            <span class="file-drop-message" data-i18n="verify.dropPublicKey">Drag & drop public key file here</span>
+                            <input type="file" id="public-key-input" class="file-drop-input" />
+                        </div>
+                        <div id="verify-key-status" class="form-text text-muted" data-i18n="verify.noKeyLoaded">No key loaded (supports ED25519 and RSA)</div>
+                    </div>
+
+                    <div class="text-center mb-3" id="verify-qr-container" style="display: none;">
+                        <h3 class="fs-5 mb-2" data-i18n="verify.uploadedQR">Uploaded QR Code:</h3>
+                        <img id="verify-qr_image" class="img-fluid mx-auto d-block border" alt="Uploaded QR Code" />
+                    </div>
+
+                    <button id="verify-signature-btn" class="btn btn-primary py-button w-100" disabled data-i18n="verify.button">Verify Signature</button>
+                    <p id="verification-result" class="mt-2 text-center" data-i18n="verify.result">Load a QR code, signature and public key to verify.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detect QR Code section -->
+        <div id="detect" class="page">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="mb-0 fs-4" data-i18n="detect.title">Detect QR Code</h2>
+                </div>
+                <div class="card-body">
+                    <p class="mb-4" data-i18n="detect.description">Due to the static nature of GitHub Pages, server-side operations such as QR code detection—which require computational resources and external libraries—cannot be executed in this environment. To overcome this limitation, cross-platform native applications were developed for Windows, Linux, and macOS. These tools, collectively referred to as QRebuild, are distributed as self-contained executables in both command-line (CLI) and graphical (GUI) variants. QRebuild is designed to process image input locally and reconstruct the embedded QR code using platform-native performance.</p>
+                    
+                    <div class="row">
+                        <!-- Windows -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fab fa-windows fa-3x mb-3"></i>
+                                    <h3 class="h5" data-i18n="detect.windows">Windows</h3>
+                                    <div class="d-grid gap-2">
+                                        <a id="Windows-cli-download" class="btn btn-primary py-button" href="#" download>
+                                            <i class="fas fa-terminal"></i> <span data-i18n="detect.cli">Download CLI</span>
+                                        </a>
+                                        <a id="Windows-gui-download" class="btn btn-secondary py-button" href="#" download>
+                                            <i class="fas fa-window-maximize"></i> <span data-i18n="detect.gui">Download GUI</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- macOS -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fab fa-apple fa-3x mb-3"></i>
+                                    <h3 class="h5" data-i18n="detect.macos">macOS</h3>
+                                    <div class="d-grid gap-2">
+                                        <a id="macOS-cli-download" class="btn btn-primary py-button" href="#" download>
+                                            <i class="fas fa-terminal"></i> <span data-i18n="detect.cli">Download CLI</span>
+                                        </a>
+                                        <a id="macOS-gui-download" class="btn btn-secondary py-button" href="#" download>
+                                            <i class="fas fa-window-maximize"></i> <span data-i18n="detect.gui">Download GUI</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Linux -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fab fa-linux fa-3x mb-3"></i>
+                                    <h3 class="h5" data-i18n="detect.linux">Linux</h3>
+                                    <div class="d-grid gap-2">
+                                        <a id="Linux-cli-download" class="btn btn-primary py-button" href="#" download>
+                                            <i class="fas fa-terminal"></i> <span data-i18n="detect.cli">Download CLI</span>
+                                        </a>
+                                        <a id="Linux-gui-download" class="btn btn-secondary py-button" href="#" download>
+                                            <i class="fas fa-window-maximize"></i> <span data-i18n="detect.gui">Download GUI</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-left">
+            <a href="https://github.com/Pipousek/QRGuardian" target="_blank">
+                <img src="img/QRGuardian-logo.png" alt="QRGuardian Logo"></a>
+        </div>
+    
+        <div class="footer-center">
+            <p data-i18n="footer.copyright">&copy; 2025 QRGuardian. All rights reserved.</p>
+        </div>
+    
+        <div class="footer-right">
+            <a href="https://github.com/Pipousek" target="_blank">
+                <img src="img/github-mark-white.png" alt="GitHub Logo"></a>
+
+            <a href="https://github.com/Pipousek/QRebuild" target="_blank">
+                <img src="https://github.com/Pipousek/QRebuild/blob/main/img/logo.png?raw=true" alt="QRebuild Logo"></a>
+        </div>
+    </div>
+</footer>
+
+</html>

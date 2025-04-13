@@ -1,0 +1,150 @@
+{
+    "nav": {
+        "create": "Vytvoriť QR kód",
+        "decode": "Dekódovať QR kód",
+        "verify": "Overiť podpis",
+        "detect": "Detegovať QR kód"
+    },
+    "app": {
+        "title": "QRGuardian",
+        "subtitle": "Vytvárajte QR kódy so skrytými podpismi na overenie a zabezpečenie."
+    },
+    "create": {
+        "title": "Vytvoriť QR kód",
+        "qrType": "Typ QR kódu:",
+        "types": {
+            "website": "Webová URL",
+            "text": "Obyčajný text",
+            "email": "E-mail",
+            "wifi": "WiFi sieť",
+            "location": "Geografická poloha",
+            "bitcoin": "Platba Bitcoinom",
+            "sms": "SMS správa",
+            "phone": "Telefónne číslo",
+            "vcard": "Kontaktné informácie (vCard)",
+            "json": "JSON dáta"
+        },
+        "website": {
+            "url": "Webová URL:"
+        },
+        "text": {
+            "content": "Textový obsah:"
+        },
+        "contact": {
+            "name": "Meno:",
+            "phone": "Telefónne číslo:",
+            "email": "E-mail:",
+            "address": "Adresa:",
+            "website": "Webová stránka:"
+        },
+        "email": {
+            "address": "E-mailová adresa:",
+            "subject": "Predmet:",
+            "body": "Telo správy:"
+        },
+        "wifi": {
+            "ssid": "Názov siete (SSID):",
+            "password": "Heslo:",
+            "encryption": "Typ šifrovania:",
+            "encryptionTypes": {
+                "wpa": "WPA/WPA2",
+                "wep": "WEP",
+                "nopass": "Žiadne"
+            },
+            "hidden": "Skrytá sieť:",
+            "hiddenOptions": {
+                "false": "Nie",
+                "true": "Áno"
+            }
+        },
+        "location": {
+            "latitude": "Zemepisná šírka:",
+            "longitude": "Zemepisná dĺžka:"
+        },
+        "bitcoin": {
+            "address": "Bitcoin adresa:",
+            "amount": "Suma (voliteľné):",
+            "label": "Popis (voliteľné):",
+            "message": "Správa (voliteľné):"
+        },
+        "sms": {
+            "number": "Telefónne číslo:",
+            "message": "Správa:"
+        },
+        "phone": {
+            "number": "Telefónne číslo:"
+        },
+        "vcard": {
+            "name": "Celé meno:",
+            "phone": "Telefón:",
+            "email": "E-mail:",
+            "org": "Organizácia:",
+            "title": "Pozícia:",
+            "url": "Webová stránka:",
+            "address": "Adresa:",
+            "note": "Poznámka:"
+        },
+        "json": {
+            "content": "JSON obsah:"
+        },
+        "signature": {
+            "title": "Digitálny podpis",
+            "uploadPrivateKey": "Nahrať súkromný kľúč (ED25519 alebo RSA):",
+            "dropPrivateKey": "Presuňte sem súbor s privátnym kľúčom alebo kliknite pre prehliadanie",
+            "noKeyLoaded": "Žiadny kľúč nie je nahraný (podporuje ED25519 a RSA)"
+        },
+        "watermark": {
+            "title": "Vodoznak (voliteľné):",
+            "dropWatermark": "Presuňte sem obrázok vodoznaku alebo kliknite pre prehliadanie",
+            "opacity": "Priehľadnosť vodoznaku:"
+        },
+        "buttons": {
+            "create": "Vytvoriť QR kód",
+            "decode": "Dekódovať skrytú správu",
+            "downloadSignature": "Stiahnuť súbor s podpisom"
+        },
+        "generated": {
+            "title": "Vygenerovaný QR kód:",
+            "hiddenMessage": "Skrytá správa sa zobrazí tu."
+        },
+        "stegMethod": "Metóda steganografie:",
+        "useSteganography": "Použiť steganografiu (skryť podpis v QR kóde)"
+    },
+    "decode": {
+        "title": "Dekódovať externý QR kód",
+        "uploadQR": "Nahrať obrázok QR kódu so skrytou správou:",
+        "dropQR": "Presuňte sem obrázok QR kódu alebo kliknite pre prehliadanie",
+        "uploadedQR": "Nahraný QR kód:",
+        "button": "Dekódovať skrytú správu",
+        "message": "Skrytá správa sa zobrazí tu."
+    },
+    "verify": {
+        "title": "Overiť podpis QR kódu",
+        "uploadQR": "Nahrať obrázok QR kódu na overenie:",
+        "dropQR": "Presuňte sem obrázok QR kódu alebo kliknite pre prehliadanie",
+        "uploadPublicKey": "Nahrať verejný kľúč (ED25519 alebo RSA):",
+        "dropPublicKey": "Presuňte sem súbor s verejným kľúčom alebo kliknite pre prehliadanie",
+        "noKeyLoaded": "Žiadny kľúč nie je nahraný (podporuje ED25519 a RSA)",
+        "uploadedQR": "Nahraný QR kód:",
+        "button": "Overiť podpis",
+        "result": "Pre overenie podpisu nahrajte QR kód a verejný kľúč.",
+        "uploadSig": "Nahrať súbor s podpisom (.txt):",
+        "dropSig": "Presuňte sem textový súbor s podpisom"
+    },
+    "detect": {
+        "title": "Detegovať QR kód",
+        "description": "Vzhľadom na statickú povahu GitHub Pages nie je možné v tomto prostredí vykonávať operácie na strane servera, ako je detekcia QR kódov, ktorá vyžaduje výpočtové zdroje a externé knižnice. Na prekonanie tohto obmedzenia boli vyvinuté multiplatformové natívne aplikácie pre Windows, Linux a macOS. Tieto nástroje, súhrnne označované ako QRebuild, sú distribuované ako samostatné spustiteľné súbory v príkazovom riadku (CLI) aj grafických (GUI) variantoch. QRebuild je navrhnutý na lokálne spracovanie obrazových vstupov a rekonštrukciu vloženého QR kódu s využitím natívneho výkonu platformy.",
+        "windows": "Windows",
+        "macos": "macOS",
+        "linux": "Linux",
+        "cli": "Stiahnuť CLI",
+        "gui": "Stiahnuť GUI"
+    },
+    "footer" : {
+        "copyright": "2025 QRGuardian. Všetky práva vyhradené."
+    },
+    "fileUpload": {
+        "remove": "Odstrániť súbor",
+        "dragDrop": "Presuňte sem svoj súbor alebo kliknite pre prehliadanie"
+    }
+}

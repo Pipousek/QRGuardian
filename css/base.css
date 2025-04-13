@@ -1,0 +1,121 @@
+/* Base styles */
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #45a049;
+    border-color: #45a049;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
+.btn:disabled {
+    background-color: #cccccc;
+    border-color: #cccccc;
+}
+
+/* Form elements */
+.form-control,
+.form-select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.mb-3 {
+    margin-bottom: 1.5rem !important;
+}
+
+.py-input.col-sm-8 {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Status messages */
+#status-message,
+#decoded-message,
+#decode-decoded-message,
+#verification-result {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+/* Update the key status style */
+#key-status {
+    font-weight: bold;
+    color: #4CAF50;
+    margin-top: 0.5rem;
+}
+
+.file-drop-area.has-file #key-status {
+    color: #4CAF50;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.footer-left img,
+.footer-right img {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.footer-right a {
+    margin-left: 10px;
+}
+
+.footer-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.footer-center p {
+    margin: 0;
+    font-size: 14px;
+}
+  
+.title-icon {
+    height: 50px;
+    vertical-align: middle;
+}

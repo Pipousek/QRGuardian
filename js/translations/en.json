@@ -1,0 +1,150 @@
+{
+    "nav": {
+        "create": "Create QR Code",
+        "decode": "Decode QR Code",
+        "verify": "Verify Signature",
+        "detect": "Detect QR Code"
+    },
+    "app": {
+        "title": "QRGuardian",
+        "subtitle": "Create watermarked QR codes with hidden signatures for authentication and security."
+    },
+    "create": {
+        "title": "Create QR Code",
+        "qrType": "QR Code Type:",
+        "types": {
+            "website": "Website URL",
+            "text": "Plain Text",
+            "email": "Email",
+            "wifi": "WiFi Network",
+            "location": "Geographic Location",
+            "bitcoin": "Bitcoin Payment",
+            "sms": "SMS Message",
+            "phone": "Phone Number",
+            "vcard": "Contact Information (vCard)",
+            "json": "JSON Data"
+        },
+        "website": {
+            "url": "Website URL:"
+        },
+        "text": {
+            "content": "Text Content:"
+        },
+        "contact": {
+            "name": "Name:",
+            "phone": "Phone Number:",
+            "email": "Email:",
+            "address": "Address:",
+            "website": "Website:"
+        },
+        "email": {
+            "address": "Email Address:",
+            "subject": "Subject:",
+            "body": "Body:"
+        },
+        "wifi": {
+            "ssid": "Network Name (SSID):",
+            "password": "Password:",
+            "encryption": "Encryption Type:",
+            "encryptionTypes": {
+                "wpa": "WPA/WPA2",
+                "wep": "WEP",
+                "nopass": "None"
+            },
+            "hidden": "Hidden Network:",
+            "hiddenOptions": {
+                "false": "No",
+                "true": "Yes"
+            }
+        },
+        "location": {
+            "latitude": "Latitude:",
+            "longitude": "Longitude:"
+        },
+        "bitcoin": {
+            "address": "Bitcoin Address:",
+            "amount": "Amount (optional):",
+            "label": "Label (optional):",
+            "message": "Message (optional):"
+        },
+        "sms": {
+            "number": "Phone Number:",
+            "message": "Message:"
+        },
+        "phone": {
+            "number": "Phone Number:"
+        },
+        "vcard": {
+            "name": "Full Name:",
+            "phone": "Phone:",
+            "email": "Email:",
+            "org": "Organization:",
+            "title": "Title:",
+            "url": "Website:",
+            "address": "Address:",
+            "note": "Note:"
+        },
+        "json": {
+            "content": "JSON Content:"
+        },
+        "signature": {
+            "title": "Digital Signature",
+            "uploadPrivateKey": "Upload Private Key (ED25519 or RSA):",
+            "dropPrivateKey": "Drag & drop your private key file here or click to browse",
+            "noKeyLoaded": "No key loaded (supports ED25519 and RSA)"
+        },
+        "watermark": {
+            "title": "Watermark Image (optional):",
+            "dropWatermark": "Drag & drop your watermark image here or click to browse",
+            "opacity": "Watermark Opacity:"
+        },
+        "buttons": {
+            "create": "Create QR Code",
+            "decode": "Decode Hidden Message",
+            "downloadSignature": "Download Signature File"
+        },
+        "generated": {
+            "title": "Generated QR Code:",
+            "hiddenMessage": "Hidden message will appear here."
+        },
+        "stegMethod": "Steganography Method:",
+        "useSteganography": "Use steganography (hide signature in QR code)"
+    },
+    "decode": {
+        "title": "Decode External QR Code",
+        "uploadQR": "Upload a QR Code Image with Hidden Message:",
+        "dropQR": "Drag & drop your QR code image here or click to browse",
+        "uploadedQR": "Uploaded QR Code:",
+        "button": "Decode Hidden Message",
+        "message": "Hidden message will appear here."
+    },
+    "verify": {
+        "title": "Verify QR Code Signature",
+        "uploadQR": "Upload a QR Code Image to Verify:",
+        "dropQR": "Drag & drop your QR code image here or click to browse",
+        "uploadPublicKey": "Upload Public Key (ED25519 or RSA):",
+        "dropPublicKey": "Drag & drop your public key file here or click to browse",
+        "noKeyLoaded": "No key loaded (supports ED25519 and RSA)",
+        "uploadedQR": "Uploaded QR Code:",
+        "button": "Verify Signature",
+        "result": "Load a QR code and public key to verify signature.",
+        "uploadSig": "Upload Signature File (.txt):",
+        "dropSig": "Drag & drop signature text file here"
+    },
+    "detect": {
+        "title": "Detect QR Code",
+        "description": "Due to the static nature of GitHub Pages, server-side operations such as QR code detection, which require computational resources and external libraries, cannot be executed in this environment. To overcome this limitation, cross-platform native applications were developed for Windows, Linux, and macOS. These tools, collectively referred to as QRebuild, are distributed as self-contained executables in both command-line (CLI) and graphical (GUI) variants. QRebuild is designed to process image input locally and reconstruct the embedded QR code using platform-native performance.",
+        "windows": "Windows",
+        "macos": "macOS",
+        "linux": "Linux",
+        "cli": "Download CLI",
+        "gui": "Download GUI"
+    },
+    "footer" : {
+        "copyright": "2025 QRGuardian. All rights reserved."
+    },
+    "fileUpload": {
+        "remove": "Remove File",
+        "dragDrop": "Drag & drop your file here or click to browse"
+    }
+}

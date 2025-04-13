@@ -1,0 +1,44 @@
+/* Responsive Styles */
+@media (max-width: 576px) {
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .nav-pills .nav-link {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .form-control,
+    .form-select {
+        width: 100%;
+    }
+
+    .file-drop-container {
+        padding-bottom: 3rem;
+    }
+
+    .file-delete-btn-container {
+        bottom: 0.5rem;
+        left: 0.5rem;
+        right: 0.5rem;
+    }
+    
+    .language-selector {
+        position: relative;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+    }
+}
