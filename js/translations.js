@@ -4,9 +4,9 @@ const I18N = {
     currentLanguage: 'en',
     translations: {},
     languageFlagPaths: {
-        'en': '/img/flags/gb.svg',
-        'cs': '/img/flags/cz.svg',
-        'sk': '/img/flags/sk.svg'
+        'en': 'img/flags/gb.svg',
+        'cs': 'img/flags/cz.svg',
+        'sk': 'img/flags/sk.svg'
     },
 
     // Initialize the translation system
