@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Update download links
     Downloads.updateLinks();
 
+    // Handle download for generated QR code
+    Downloads.downloadGeneratedQR();
+
     // Initialize navigation
     Navigation.initialize();
     

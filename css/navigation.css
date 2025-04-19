@@ -63,3 +63,11 @@
     display: flex;
     align-items: center;
 }
+
+.flag-icon {
+    width: 20px;
+    height: 15px;
+    margin-right: 8px;
+    vertical-align: middle;
+    object-fit: cover;
+}

@@ -61,6 +61,7 @@ body {
 /* Status messages */
 #status-message,
 #decoded-message,
+#decoded-hex,
 #decode-decoded-message,
 #verification-result {
     font-weight: bold;

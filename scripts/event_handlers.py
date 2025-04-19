@@ -123,10 +123,6 @@ def generate_qr():
 
 # @when('click', '#decode-btn')
 def decode_qr():
-    # Get the selected steganography method
-    use_steganography = document.querySelector("#use-steganography").checked
-    steg_method = 'lsb' if use_steganography else None
-
     # Get the image element
     img_element = document.querySelector("#qr_image")
     
@@ -143,7 +139,7 @@ def decode_qr():
             img = Image.open(io.BytesIO(byte_array.to_py()))
             
             # Decode the signature
-            signature = decode_signature_from_image(img, method=steg_method)
+            signature = decode_signature_from_image(img, method='lsb')
             
             if signature:
                 document.querySelector("#decoded-message").textContent = f"Signature found: {signature.hex()}"
@@ -157,10 +153,6 @@ def decode_qr():
 
 #@when('click', '#decode-external-btn')
 def decode_external_qr():
-    # Get the selected steganography method
-    use_steganography = document.querySelector("#use-steganography").checked
-    steg_method = 'lsb' if use_steganography else None
-
     # Get the image element
     img_element = document.querySelector("#decode-qr_image")
     
@@ -177,7 +169,7 @@ def decode_external_qr():
             img = Image.open(io.BytesIO(byte_array.to_py()))
             
             # Decode the signature
-            signature = decode_signature_from_image(img, method=steg_method)
+            signature = decode_signature_from_image(img, method='lsb')
             
             if signature:
                 document.querySelector("#decode-decoded-message").textContent = f"Signature found: {signature.hex()}"
@@ -191,10 +183,6 @@ def decode_external_qr():
 
 # @when('click', '#verify-signature-btn')
 def verify_qr_signature():
-    # Get the selected steganography method
-    use_steganography = document.querySelector("#use-steganography").checked
-    steg_method = 'lsb' if use_steganography else None
-
     # Get the image element
     img_element = document.querySelector("#verify-qr_image")
     
@@ -282,7 +270,7 @@ def verify_qr_signature():
 
             # Try to verify with steganography signature if available
             if img_element.src:
-                steg_signature = decode_signature_from_image(img, method=steg_method)
+                steg_signature = decode_signature_from_image(img, method='lsb')
                 if steg_signature:
                     steg_verified = verify_signature(public_key, steg_signature, content_bytes, key_type)
                     if not steg_verified:
@@ -358,18 +346,42 @@ def handle_verify_file_upload(event):
 # @when('change', '#watermark-input')
 def preview_watermark(event):
     watermark_input = document.querySelector("#watermark-input")
+    controls = document.querySelector("#watermark-controls")
+    preview = document.querySelector("#watermark-preview")
+    
     if watermark_input.files.length == 0:
         # Clear the preview if file is removed
-        preview = document.querySelector("#watermark-preview")
         if preview:
+            preview.onerror = None
             preview.src = ""
             preview.style.display = "none"
-        return
         
+        if controls:
+            controls.style.display = "none"
+        return
+    
     watermark_file = watermark_input.files.item(0)
     
-    # Update the preview image if it exists
-    preview = document.querySelector("#watermark-preview")
+    # Validate file type
+    file_type = watermark_file.type
+    if not file_type.startswith('image/'):
+        document.querySelector("#status-message").textContent = "Error: Please upload an image file"
+        return
+    
+    # Show controls and update the preview image
+    if controls:
+        controls.style.display = "block"
+    
     if preview:
-        preview.src = URL.createObjectURL(watermark_file)
+        # Create object URL for the preview
+        preview_url = URL.createObjectURL(watermark_file)
+        
+        # Add error handler for the image
+        def handle_image_error(e):
+            console.log("Error loading preview image")
+            preview.src = ""
+            document.querySelector("#status-message").textContent = "Error: Unable to load image"
+        
+        preview.onerror = handle_image_error
+        preview.src = preview_url
         preview.style.display = "block"

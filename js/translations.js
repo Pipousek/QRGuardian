@@ -3,10 +3,10 @@ const I18N = {
     defaultLanguage: 'en',
     currentLanguage: 'en',
     translations: {},
-    languageFlags: {
-        'en': '🇬🇧',
-        'cs': '🇨🇿',
-        'sk': '🇸🇰'
+    languageFlagPaths: {
+        'en': '/img/flags/gb.svg',
+        'cs': '/img/flags/cz.svg',
+        'sk': '/img/flags/sk.svg'
     },
 
     // Initialize the translation system
@@ -110,25 +110,24 @@ const I18N = {
             
             // Load and apply translations
             await this.loadTranslations(lang);
-            this.applyTranslations();
-            
-            // Update file drop areas
-            document.querySelectorAll('.file-drop-container').forEach(container => {
+
+            // Save the state of file drop containers before applying translations
+            const fileContainers = [];
+            document.querySelectorAll('.file-drop-container.has-file').forEach(container => {
                 const message = container.querySelector('.file-drop-message');
                 if (message) {
-                    message.setAttribute('data-i18n', 'fileUpload.dragDrop');
-                    if (I18N.translations && I18N.translations.fileUpload) {
-                        message.textContent = I18N.translations.fileUpload.dragDrop;
-                    }
+                    fileContainers.push({
+                        element: message,
+                        text: message.textContent
+                    });
                 }
-    
-                const deleteBtn = container.querySelector('.file-delete-btn');
-                if (deleteBtn) {
-                    const span = deleteBtn.querySelector('span');
-                    if (span && I18N.translations && I18N.translations.fileUpload) {
-                        span.textContent = I18N.translations.fileUpload.remove;
-                    }
-                }
+            });
+
+            this.applyTranslations();
+
+            // Restore file names where files were uploaded
+            fileContainers.forEach(saved => {
+                saved.element.textContent = saved.text;
             });
         }
     },
@@ -137,11 +136,12 @@ const I18N = {
     updateLanguageUI: function() {
         const currentLangFlag = document.getElementById('current-language-flag');
         const currentLangCode = document.getElementById('current-language-code');
-        
+    
         if (currentLangFlag) {
-            currentLangFlag.textContent = this.languageFlags[this.currentLanguage];
+            currentLangFlag.setAttribute('src', this.languageFlagPaths[this.currentLanguage]);
+            currentLangFlag.setAttribute('alt', this.currentLanguage.toUpperCase());
         }
-        
+    
         if (currentLangCode) {
             currentLangCode.textContent = this.currentLanguage.toUpperCase();
         }

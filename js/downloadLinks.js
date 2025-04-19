@@ -38,5 +38,26 @@ const Downloads = {
                     el.setAttribute('download', `QRebuild-${appName}-${fallbackVersion}-${osName}`);
                 });
             });
+    },
+
+    downloadGeneratedQR: function() {
+        const downloadBtn = document.querySelector('#download-qr-btn');
+        if (downloadBtn) {
+            downloadBtn.style.display = 'none';
+        }
+        
+        // Add click event listener for download button
+        downloadBtn.addEventListener('click', function() {
+            const qrImage = document.querySelector('#qr_image');
+            if (qrImage && qrImage.src) {
+            // Create an anchor element and trigger download
+            const link = document.createElement('a');
+            link.href = qrImage.src;
+            link.download = 'qr_code.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            }
+        });
     }
 };

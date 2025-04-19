@@ -40,15 +40,25 @@
                 <div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <span id="current-language-flag">🇬🇧</span>
+                        <img id="current-language-flag" src="/img/flags/gb.svg" alt="EN" class="flag-icon">
                         <span id="current-language-code">EN</span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                        <li><a class="dropdown-item" href="#" data-lang="en"><span class="flag">🇬🇧</span> English</a>
+                        <li>
+                            <a class="dropdown-item" href="#" data-lang="en">
+                                <img src="/img/flags/gb.svg" alt="English" class="flag-icon"> English
+                            </a>
                         </li>
-                        <li><a class="dropdown-item" href="#" data-lang="cs"><span class="flag">🇨🇿</span> Čeština</a>
+                        <li>
+                            <a class="dropdown-item" href="#" data-lang="cs">
+                                <img src="/img/flags/cz.svg" alt="Čeština" class="flag-icon"> Čeština
+                            </a>
                         </li>
-                        <li><a class="dropdown-item" href="#" data-lang="sk"><span class="flag">🇸🇰</span>Slovenčina</a></li>
+                        <li>
+                            <a class="dropdown-item" href="#" data-lang="sk">
+                                <img src="/img/flags/sk.svg" alt="Slovenčina" class="flag-icon"> Slovenčina
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -285,8 +295,11 @@
                         </div>
                     </div>
 
+                    <!-- Watermark Section -->
                     <div class="file-drop-area mb-3">
-                        <label for="watermark-input" class="form-label" data-i18n="create.watermark.title">Watermark Image (optional):</label>
+                        <div class="card-header">
+                            <h3 class="mb-0 fs-5" data-i18n="create.watermark.title">Watermark Image (optional):</h3>
+                        </div>
                         <div class="file-drop-container">
                             <i class="fas fa-cloud-upload-alt file-drop-icon"></i>
                             <span class="file-drop-message" data-i18n="create.watermark.dropWatermark">Drag & drop your watermark image here or click to browse</span>
@@ -304,21 +317,65 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <button id="generate-btn" class="btn btn-primary py-button w-100" type="submit" data-i18n="create.buttons.create">Create QR Code</button>
-                <div id="status-message" class="mt-2 text-center"></div>
+                    <!-- Error Correction Level Section -->
+                    <div class="mb-3 card">
+                        <div class="card-header">
+                            <h3 class="mb-0 fs-5" data-i18n="create.errorCorrection.title">Error Correction Level:</h3>
+                        </div>
+                        <div class="d-flex justify-content-center flex-wrap">
+                            <div class="form-check mx-3">
+                                <input class="form-check-input" type="radio" name="error-correction" id="ec-l" value="L">
+                                <label class="form-check-label" for="ec-l" data-i18n="create.errorCorrection.low">
+                                    Low (7%)
+                                </label>
+                            </div>
+                            <div class="form-check mx-3">
+                                <input class="form-check-input" type="radio" name="error-correction" id="ec-m" value="M">
+                                <label class="form-check-label" for="ec-m" data-i18n="create.errorCorrection.medium">
+                                    Medium (15%)
+                                </label>
+                            </div>
+                            <div class="form-check mx-3">
+                                <input class="form-check-input" type="radio" name="error-correction" id="ec-q" value="Q">
+                                <label class="form-check-label" for="ec-q" data-i18n="create.errorCorrection.quartile">
+                                    Quartile (25%)
+                                </label>
+                            </div>
+                            <div class="form-check mx-3">
+                                <input class="form-check-input" type="radio" name="error-correction" id="ec-h" value="H" checked>
+                                <label class="form-check-label" for="ec-h" data-i18n="create.errorCorrection.high">
+                                    High (30%)
+                                </label>
+                            </div>
+                        </div>
+                        <small class="form-text text-muted text-center" data-i18n="create.errorCorrection.help">Higher levels allow QR codes to remain readable even when partially damaged but reduce data capacity.</small>
+                    </div>
+
+                    <!-- Generate QR Button -->
+                    <div class="mt-3">
+                        <button id="generate-btn" class="btn btn-primary py-button w-100" type="submit" data-i18n="create.buttons.create">Create QR Code</button>
+                        <div id="status-message" class="mt-2 text-center"></div>
+                    </div>
+                </div>
             </div>
 
+            <!-- Generated QR Code sub-section-->
             <div class="card mb-4">
                 <div class="card-header">
                     <h2 class="mb-0 fs-4" data-i18n="create.generated.title">Generated QR Code:</h2>
                 </div>
                 <div class="card-body text-center">
-                    <img id="qr_image" class="img-fluid mx-auto d-block border" />
+                    <img id="qr_image" class="img-fluid mx-auto d-block border" alt="QR Image" />
+
+                    <div class="mt-3">
+                        <button id="download-qr-btn" class="btn btn-success py-button">
+                            <i class="fas fa-download"></i> <span data-i18n="create.buttons.download">Download QR Code</span>
+                        </button>
+                    </div>
 
                     <div class="mt-3" id="signature-download-container" style="display: none;">
-                        <a id="signature-download-link" class="btn btn-secondary py-button" download="signature.bin">
+                        <a id="signature-download-link" class="btn btn-secondary py-button">
                             <i class="fas fa-download"></i> <span data-i18n="create.buttons.downloadSignature">Download Signature File</span>
                         </a>
                     </div>
@@ -472,27 +529,25 @@
             </div>
         </div>
     </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <a href="https://github.com/Pipousek/QRGuardian" target="_blank">
+                    <img src="img/QRGuardian-logo.png" alt="QRGuardian Logo"></a>
+            </div>
+        
+            <div class="footer-center">
+                <p data-i18n="footer.copyright">&copy; 2025 QRGuardian. All rights reserved.</p>
+            </div>
+        
+            <div class="footer-right">
+                <a href="https://github.com/Pipousek" target="_blank">
+                    <img src="img/github-mark-white.png" alt="GitHub Logo"></a>
+    
+                <a href="https://github.com/Pipousek/QRebuild" target="_blank">
+                    <img src="https://github.com/Pipousek/QRebuild/blob/main/img/logo.png?raw=true" alt="QRebuild Logo"></a>
+            </div>
+        </div>
+    </footer>
 </body>
-
-<footer>
-    <div class="footer-content">
-        <div class="footer-left">
-            <a href="https://github.com/Pipousek/QRGuardian" target="_blank">
-                <img src="img/QRGuardian-logo.png" alt="QRGuardian Logo"></a>
-        </div>
-    
-        <div class="footer-center">
-            <p data-i18n="footer.copyright">&copy; 2025 QRGuardian. All rights reserved.</p>
-        </div>
-    
-        <div class="footer-right">
-            <a href="https://github.com/Pipousek" target="_blank">
-                <img src="img/github-mark-white.png" alt="GitHub Logo"></a>
-
-            <a href="https://github.com/Pipousek/QRebuild" target="_blank">
-                <img src="https://github.com/Pipousek/QRebuild/blob/main/img/logo.png?raw=true" alt="QRebuild Logo"></a>
-        </div>
-    </div>
-</footer>
-
 </html>

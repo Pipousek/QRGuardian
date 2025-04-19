@@ -98,10 +98,19 @@
             "dropWatermark": "Presuňte sem obrázok vodoznaku alebo kliknite pre prehliadanie",
             "opacity": "Priehľadnosť vodoznaku:"
         },
+        "errorCorrection": {
+            "title": "Úroveň korekcie chýb:",
+            "low": "Nízka (7%)",
+            "medium": "Stredná (15%)",
+            "quartile": "Kvartil (25%)",
+            "high": "Vysoká (30%)",
+            "help": "Vyššie úrovne umožňujú čitateľnosť QR kódu aj pri čiastočnom poškodení, ale znižujú kapacitu dát."
+        },
         "buttons": {
             "create": "Vytvoriť QR kód",
             "decode": "Dekódovať skrytú správu",
-            "downloadSignature": "Stiahnuť súbor s podpisom"
+            "downloadSignature": "Stiahnuť súbor s podpisom",
+            "download": "Stiahnuť QR kód"
         },
         "generated": {
             "title": "Vygenerovaný QR kód:",

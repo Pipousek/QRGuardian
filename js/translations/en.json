@@ -98,17 +98,26 @@
             "dropWatermark": "Drag & drop your watermark image here or click to browse",
             "opacity": "Watermark Opacity:"
         },
+        "errorCorrection": {
+            "title": "Error Correction Level:",
+            "low": "Low (7%)",
+            "medium": "Medium (15%)",
+            "quartile": "Quartile (25%)",
+            "high": "High (30%)",
+            "help": "Higher levels allow QR codes to remain readable even when partially damaged but reduce data capacity."
+        },
         "buttons": {
             "create": "Create QR Code",
             "decode": "Decode Hidden Message",
-            "downloadSignature": "Download Signature File"
+            "downloadSignature": "Download Signature File",
+            "download": "Download QR Code"
         },
         "generated": {
             "title": "Generated QR Code:",
             "hiddenMessage": "Hidden message will appear here."
         },
         "stegMethod": "Steganography Method:",
-        "useSteganography": "Use steganography (hide signature in QR code)"
+        "useSte:ganography": "Use steganography (hide signature in QR code)"
     },
     "decode": {
         "title": "Decode External QR Code",

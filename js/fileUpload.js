@@ -148,6 +148,9 @@ const FileUpload = {
             if (file.type.startsWith('image/') && input.id === 'watermark-input') {
                 const preview = document.querySelector('#watermark-preview');
                 if (preview) {
+                    if (preview.src && preview.src.startsWith('blob:')) {
+                        URL.revokeObjectURL(preview.src);
+                    }
                     preview.src = URL.createObjectURL(file);
                     preview.style.display = 'block';
                 }
