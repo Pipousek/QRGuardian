@@ -19,6 +19,10 @@ from event_handlers import (
     preview_watermark
 )
 
+# Hide loader
+loader = document.getElementById("loader")
+loader.classList.add("fade-out")
+
 # Register event handlers
 when('change', '#private-key-input')(handle_private_key_upload)
 when('change', '#public-key-input')(handle_public_key_upload)

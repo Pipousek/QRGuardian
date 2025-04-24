@@ -3,7 +3,6 @@ import io
 from PIL import Image
 import qrcode
 import base64
-import json
 from crypto import create_signature_download
 from stego import encode_signature_in_image
 from base64_signed_badge import SIGNED_BADGE_BASE64
