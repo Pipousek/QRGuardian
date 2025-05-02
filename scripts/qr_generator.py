@@ -61,7 +61,7 @@ def generate_qr_with_content(content, signature=None):
         qr = qrcode.QRCode(
             version=1,
             error_correction=error_correct,
-            box_size=10,
+            box_size=20,
             border=4,
         )
         qr.add_data(content)

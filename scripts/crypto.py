@@ -99,31 +99,28 @@ def load_and_parse_public_key(key_bytes):
 def sign_content(content, private_key, key_type):
     if not private_key:
         return None
-   
+
     try:
         if key_type == 'ed25519':
             signature = private_key.sign(content.encode('utf-8'))
+
         elif key_type == 'rsa':
-            # Compute hash first
-            hash_algorithm = hashes.SHA256()
-            hasher = hashes.Hash(hash_algorithm)
-            hasher.update(content.encode('utf-8'))
-            computed_hash = hasher.finalize()
-            
-            # Sign the hash
+            # Sign the raw content, let library hash internally
             signature = private_key.sign(
-                computed_hash,
+                content.encode('utf-8'),
                 padding.PSS(
                     mgf=padding.MGF1(hashes.SHA256()),
                     salt_length=padding.PSS.MAX_LENGTH
                 ),
                 hashes.SHA256()
             )
+
         else:
             console.log(f"Unsupported key type for signing: {key_type}")
             return None
-           
+
         return signature
+
     except Exception as e:
         console.log(f"Error signing content: {e}")
         document.querySelector("#key-status").textContent = f"Error signing content: {str(e)}"
