@@ -3,7 +3,7 @@ import io
 from PIL import Image
 import qrcode
 import base64
-from crypto import create_signature_download
+from crypto import create_signature_download, sign_content, load_and_parse_private_key
 from stego import encode_signature_in_image
 from base64_signed_badge import SIGNED_BADGE_BASE64
 import qr_content
@@ -94,6 +94,41 @@ def generate_qr_with_content(content, signature=None):
         console.log(f"Error generating QR code: {e}")
         document.querySelector("#status-message").textContent = f"Error: {str(e)}"
 
+def sign_and_generate_qr(content):
+    private_key_input = document.querySelector("#private-key-input")
+    key_file = private_key_input.files.item(0)
+    
+    reader = FileReader.new()
+    reader.readAsArrayBuffer(key_file)
+    
+    def on_load(event):
+        try:
+            array_buffer = reader.result
+            byte_array = Uint8Array.new(array_buffer)
+            key_bytes = byte_array.to_py()
+            
+            # Load key temporarily
+            temp_key, key_type = load_and_parse_private_key(key_bytes)
+            if not temp_key:
+                document.querySelector("#status-message").textContent = "Failed to load private key"
+                return
+            
+            # Sign the content with the appropriate algorithm
+            signature = sign_content(content, temp_key, key_type)
+            
+            # Clear the key immediately after use
+            temp_key = None
+            
+            if signature:
+                # Continue with QR generation using the signature
+                generate_qr_with_content(content, signature)
+            else:
+                document.querySelector("#status-message").textContent = "Failed to sign content"
+        except Exception as e:
+            console.log(f"Error in signing process: {e}")
+            document.querySelector("#status-message").textContent = f"Error: {str(e)}"
+    
+    reader.onload = on_load
 
 def complete_qr_generation(qr_image, signature, steg_method):
     """Complete the QR generation process after watermarking stage"""

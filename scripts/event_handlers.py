@@ -1,48 +1,11 @@
-from js import document, console, Uint8Array, window, File, URL, FileReader, jsQR
-from pyscript import when
+from js import document, console, Uint8Array, window, URL, FileReader, jsQR
 import asyncio
 import io
 from PIL import Image
-from qr_generator import get_qr_content_by_mode, generate_qr_with_content
+from qr_generator import get_qr_content_by_mode, generate_qr_with_content, sign_and_generate_qr
 from stego import decode_signature_from_image
-from crypto import load_and_parse_private_key, load_and_parse_public_key, sign_content, verify_signature, detect_key_type
+from crypto import load_and_parse_private_key, load_and_parse_public_key, verify_signature, detect_key_type
 from ui_handlers import update_status_message, process_image_file, load_key_file, process_verification_result
-
-def sign_and_generate_qr(content):
-    private_key_input = document.querySelector("#private-key-input")
-    key_file = private_key_input.files.item(0)
-    
-    reader = FileReader.new()
-    reader.readAsArrayBuffer(key_file)
-    
-    def on_load(event):
-        try:
-            array_buffer = reader.result
-            byte_array = Uint8Array.new(array_buffer)
-            key_bytes = byte_array.to_py()
-            
-            # Load key temporarily
-            temp_key, key_type = load_and_parse_private_key(key_bytes)
-            if not temp_key:
-                document.querySelector("#status-message").textContent = "Failed to load private key"
-                return
-            
-            # Sign the content with the appropriate algorithm
-            signature = sign_content(content, temp_key, key_type)
-            
-            # Clear the key immediately after use
-            temp_key = None
-            
-            if signature:
-                # Continue with QR generation using the signature
-                generate_qr_with_content(content, signature)
-            else:
-                document.querySelector("#status-message").textContent = "Failed to sign content"
-        except Exception as e:
-            console.log(f"Error in signing process: {e}")
-            document.querySelector("#status-message").textContent = f"Error: {str(e)}"
-    
-    reader.onload = on_load
 
 # @when('change', '#private-key-input')
 def handle_private_key_upload(event):
