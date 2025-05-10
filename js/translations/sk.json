@@ -142,9 +142,8 @@
     },
     "detect": {
         "title": "Detegovať QR kód",
-        "description": "Vzhľadom na statickú povahu GitHub Pages nie je možné v tomto prostredí vykonávať operácie na strane servera, ako je detekcia QR kódov, ktorá vyžaduje výpočtové zdroje a externé knižnice. Na prekonanie tohto obmedzenia boli vyvinuté multiplatformové natívne aplikácie pre Windows, Linux a macOS. Tieto nástroje, súhrnne označované ako QRebuild, sú distribuované ako samostatné spustiteľné súbory v príkazovom riadku (CLI) aj grafických (GUI) variantoch. QRebuild je navrhnutý na lokálne spracovanie obrazových vstupov a rekonštrukciu vloženého QR kódu s využitím natívneho výkonu platformy.",
+        "description": "Vzhľadom na statickú povahu GitHub Pages nie je možné v tomto prostredí vykonávať operácie na strane servera, ako je detekcia QR kódov, ktorá vyžaduje výpočtové zdroje a externé knižnice. Na prekonanie tohto obmedzenia boli vyvinuté multiplatformové natívne aplikácie pre Windows a Linux. Tieto nástroje, súhrnne označované ako QRebuild, sú distribuované ako samostatné spustiteľné súbory v príkazovom riadku (CLI) aj grafických (GUI) variantoch. QRebuild je navrhnutý na lokálne spracovanie obrazových vstupov a rekonštrukciu vloženého QR kódu s využitím natívneho výkonu platformy.",
         "windows": "Windows",
-        "macos": "macOS",
         "linux": "Linux",
         "cli": "Stiahnuť CLI",
         "gui": "Stiahnuť GUI"

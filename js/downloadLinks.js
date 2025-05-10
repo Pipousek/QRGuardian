@@ -9,7 +9,7 @@ const Downloads = {
                 const version = data.tag_name;
                 
                 // Update all download links
-                const osTypes = ['Windows', 'macOS', 'Linux'];
+                const osTypes = ['Windows', 'Linux'];
                 const appTypes = ['cli', 'gui'];
                 
                 osTypes.forEach(os => {

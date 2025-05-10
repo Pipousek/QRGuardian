@@ -142,9 +142,8 @@
     },
     "detect": {
         "title": "Detect QR Code",
-        "description": "Due to the static nature of GitHub Pages, server-side operations such as QR code detection, which require computational resources and external libraries, cannot be executed in this environment. To overcome this limitation, cross-platform native applications were developed for Windows, Linux, and macOS. These tools, collectively referred to as QRebuild, are distributed as self-contained executables in both command-line (CLI) and graphical (GUI) variants. QRebuild is designed to process image input locally and reconstruct the embedded QR code using platform-native performance.",
+        "description": "Due to the static nature of GitHub Pages, server-side operations such as QR code detection, which require computational resources and external libraries, cannot be executed in this environment. To overcome this limitation, cross-platform native applications were developed for Windows and Linux. These tools, collectively referred to as QRebuild, are distributed as self-contained executables in both command-line (CLI) and graphical (GUI) variants. QRebuild is designed to process image input locally and reconstruct the embedded QR code using platform-native performance.",
         "windows": "Windows",
-        "macos": "macOS",
         "linux": "Linux",
         "cli": "Download CLI",
         "gui": "Download GUI"
