@@ -285,16 +285,16 @@
                             <h3 class="mb-0 fs-5" data-i18n="create.signature.title">Digital Signature</h3>
                         </div>
                         <div class="file-drop-area mb-3">
-                            <label for="private-key-input" class="form-label" data-i18n="create.signature.uploadPrivateKey">Upload Private Key (ED25519 or RSA):</label>
+                            <label for="private-key-input" class="form-label mx-3" data-i18n="create.signature.uploadPrivateKey">Upload Private Key (ED25519 or RSA):</label>
                             <div class="file-drop-container">
                                 <i class="fas fa-cloud-upload-alt file-drop-icon"></i>
                                 <span class="file-drop-message" data-i18n="create.signature.dropPrivateKey">Drag & drop your private key file here or click to browse</span>
                                 <input type="file" id="private-key-input" class="file-drop-input" />
                             </div>
-                            <div id="key-status" class="form-text text-muted" data-i18n="create.signature.noKeyLoaded">No key loaded (supports ED25519 and RSA)</div>
+                            <div id="key-status" class="form-text text-muted mx-3" data-i18n="create.signature.noKeyLoaded">No key loaded (supports ED25519 and RSA)</div>
                         </div>
 
-                        <div class="mb-3 form-check">
+                        <div class="mb-3 form-check mx-3">
                             <input type="checkbox" class="form-check-input" id="use-steganography" checked>
                             <label class="form-check-label" for="use-steganography" data-i18n="create.useSteganography">Use steganography (hide signature in QR code)</label>
                         </div>

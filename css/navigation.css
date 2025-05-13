@@ -2,7 +2,7 @@
 .nav-pills .nav-link {
     color: #495057;
     background-color: #f1f1f1;
-    margin: 0 2px;
+    margin: 0px 2px;
 }
 
 .nav-pills .nav-link.active {
@@ -11,6 +11,10 @@
 
 .nav-pills .nav-link:hover:not(.active) {
     background-color: #e9ecef;
+}
+
+.nav-item {
+    margin: 5px 10px
 }
 
 .page {
