@@ -149,7 +149,8 @@
         "gui": "Stiahnuť GUI"
     },
     "footer" : {
-        "copyright": "2025 © QRGuardian. Všetky práva vyhradené."
+        "copyright": "2025 © QRGuardian. Všetky práva vyhradené.",
+        "qrtrademark": "‘QR Code’ je registrovaná ochranná známka spoločnosti DENSO WAVE INCORPORATED"
     },
     "fileUpload": {
         "remove": "Odstrániť súbor",

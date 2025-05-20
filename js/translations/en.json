@@ -149,7 +149,8 @@
         "gui": "Download GUI"
     },
     "footer" : {
-        "copyright": "2025 © QRGuardian. All rights reserved."
+        "copyright": "2025 © QRGuardian. All rights reserved.",
+        "qrtrademark": "‘QR Code’ is a registered trademark of DENSO WAVE INCORPORATED"
     },
     "fileUpload": {
         "remove": "Remove File",
